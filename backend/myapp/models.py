@@ -4,6 +4,7 @@ from django.db import models
 class Ficha(models.Model):
     # atributos base
     name = models.CharField(max_length=50)
+    imagem = models.ImageField(upload_to='media/', blank=True, null=True)
     profissao = models.CharField(max_length=50)
     vida = models.IntegerField(default=0)
     forca = models.IntegerField(default=0)
