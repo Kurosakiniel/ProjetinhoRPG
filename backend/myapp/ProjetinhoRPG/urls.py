@@ -12,7 +12,6 @@ from drf_spectacular.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    # API
     path("api/v1/", include("myapp.api.v1.router")),
 
     # Swagger
