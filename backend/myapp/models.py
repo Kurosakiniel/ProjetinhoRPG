@@ -1,8 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Ficha(models.Model):
+
+    RELIGIAO_CHOICES= [
+            ("Hibirismo", "Hibirismo"),
+            ("Ateismo", "Ateismo"),
+            ("Agnosticismo", "Agnosticismo"),
+            ("Flowdiesto", "Flowdiesto"),
+            ("Zudelista", "Zudelista"),
+            ("Sanhismo", "Sanhismo"),
+            ("Cristianismo", "Cristianismo")
+    ]
+    
     # atributos base
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Ficha")
     name = models.CharField(max_length=50)
     imagem = models.ImageField(upload_to='media/', blank=True, null=True)
     profissao = models.CharField(max_length=50)
@@ -25,12 +38,11 @@ class Ficha(models.Model):
     status_religiosos = models.TextField(blank=True, null=True)
         
     #religiao
-    religiao = [
-        ("Hibirismo", "Hibirismo"),
-        ("Ateismo", "Ateismo"),
-        ("Agnosticismo", "Agnosticismo"),
-        ("Flowdiesto", "Flowdiesto"),
-        ("Zudelista", "Zudelista"),
-        ("Sanhismo", "Sanhismo"),
-        ("Cristianismo", "Cristianismo")
-    ]
+    religiao = models.CharField(
+        max_length=20,
+        choices=RELIGIAO_CHOICES,
+        default='Agnosticismo'
+    )
+
+    def __str__(self):
+        return self.name
